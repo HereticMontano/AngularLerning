@@ -1,0 +1,9 @@
+body {
+    /* Establece la fuente principal. 
+       Si 'Roboto' no está disponible, usará 'Arial', y sino, cualquier fuente 'sans-serif' del sistema */
+    font-family: 'Roboto', Arial, sans-serif;
+    
+    /* Opcional: configurar otros valores globales del texto */
+    font-size: 16px;
+    color: #333333; 
+  }

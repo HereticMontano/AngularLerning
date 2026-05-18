@@ -1,0 +1,18 @@
+<!-- 1. ESTO ES FIJO: Nunca se recarga -->
+<div class="nav-container">
+  <nav>
+    <h2 class="logo">MU</h2>
+    <ul>
+      <li><a routerLink="/clima" routerLinkActive="active">Ver Clima</a></li>
+      <li><a routerLink="/aboutme" routerLinkActive="active">About Me</a></li>
+    </ul>    
+  </nav>
+</div>
+  <!-- 2. ESTO ES DINÁMICO: Aquí Angular inyectará las páginas -->
+  <main style="padding: 20px;">
+    <router-outlet></router-outlet>
+  </main>
+
+
+<footer style="margin-top: 50px; padding: 20px; text-align: center; background: #000;"></footer>
+    

@@ -1,0 +1,51 @@
+.nav-container {
+  width: 100%;
+  padding: 20px 40px; /* Espacio a los lados */
+  box-sizing: border-box;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between; /* Logo a la izquierda, Menú a la derecha */
+  align-items: center; /* Alineación vertical al centro */
+  width: 100%;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 300; /* Letra delgada para que se vea moderna */
+  color: #333;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 10px; /* Separación entre los botones */
+  margin: 0;
+  padding: 0;  
+  align-items: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: #777; /* Color gris para los inactivos */
+  font-size: 14px;
+  padding: 10px 20px; /* Espacio interno para dar forma de botón */
+  text-transform: uppercase; /* Pone el texto en MAYÚSCULAS */
+  letter-spacing: 1px;
+  transition: all 0.2s ease-in-out; /* Animación suave al cambiar de color */
+}
+
+/* Cuando pasas el ratón por encima (hover) */
+nav a:hover {
+  color: #c15a11;
+}
+
+/* El elemento ACTIVO (como el botón STUDIO naranja) */
+nav a.active {
+  background-color: #b75510; /* Color de fondo naranja oscuro / marrón */
+  color: white; /* Texto blanco */
+}
+
