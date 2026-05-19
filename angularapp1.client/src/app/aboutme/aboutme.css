@@ -1,0 +1,22 @@
+.pictureText {
+  display: flex;
+  justify-content:space-between;
+  width: 100%;  
+  box-sizing: border-box;
+}
+
+img {
+  margin-right: 10px;
+  align-self: flex-start; /* Evita que la imagen se estire verticalmente */
+}
+
+.textContent p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.textContent strong {
+  display: block; /* Convierte el elemento inline en bloque para que acepte márgenes verticales */
+  margin-top: 30px;
+  margin-bottom: 10px;
+}

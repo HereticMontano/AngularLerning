@@ -6,4 +6,9 @@ body {
     /* Opcional: configurar otros valores globales del texto */
     font-size: 16px;
     color: #333333; 
+
+    /* Limitar el ancho y centrar */
+    max-width: 1200px; /* Puedes ajustar este valor, ej: 1024px, 1400px, etc. */
+    margin: 0 auto; /* El 0 arriba/abajo, y auto a los lados para centrar */
+    padding: 0 20px; /* Un poco de espacio a los lados para pantallas pequeñas */
   }
