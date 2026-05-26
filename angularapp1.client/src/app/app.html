@@ -3,7 +3,8 @@
   <nav>
     <h2 class="logo">MU</h2>
     <ul>
-      <li><a routerLink="/mural" routerLinkActive="active">Ver Mural</a></li>
+      <li><a [routerLink]="['/gallery', 'mural']" routerLinkActive="active">Mural</a></li>
+      <li><a [routerLink]="['/gallery', 'studio']" routerLinkActive="active">Studio</a></li>
       <li><a routerLink="/aboutme" routerLinkActive="active">About Me</a></li>
     </ul>    
   </nav>

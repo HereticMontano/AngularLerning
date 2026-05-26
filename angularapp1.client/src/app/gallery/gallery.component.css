@@ -1,0 +1,27 @@
+.gallery-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* Salto de línea amplio entre las imágenes */
+  align-items: center; /* Centra las imágenes en la pantalla */
+  padding: 20px;
+}
+
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.gallery-item h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.gallery-item img {
+  max-width: 100%;
+  height: auto;
+  /* Al no forzar un 'width' fijo, la imagen tomará su tamaño natural "lowcuality" o se achicará si la pantalla es muy pequeña */
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Pequeño sombreado para que se vea bien */
+}

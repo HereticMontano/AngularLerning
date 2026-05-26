@@ -1,0 +1,8 @@
+<div class="gallery-container" *ngIf="pictures()">
+  <div class="gallery-item" *ngFor="let pic of pictures()">
+    <h3>{{ pic.title }}</h3>
+    <img [src]="pic.urlLocationLowCuality" [alt]="pic.description" />
+  </div>
+</div>
+
+<p *ngIf="!pictures()"><em>Cargando {{ currentCategoria }}...</em></p>
