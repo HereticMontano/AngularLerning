@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClimaComponent } from './clima/clima.component';
+import { MuralComponent } from './mural/mural.component';
 import { AboutMeComponent } from './aboutme/aboutme.component';
 
 const routes: Routes = [
-  { path: 'clima', component: ClimaComponent },
+  { path: 'mural', component: MuralComponent },
   { path: 'aboutme', component: AboutMeComponent },
-  { path: '', redirectTo: '/clima', pathMatch: 'full' },
-  { path: '**', redirectTo: '/clima' } // Ruta por defecto para URLs no encontradas
+  { path: '', redirectTo: '/mural', pathMatch: 'full' },
+  { path: '**', redirectTo: '/mural' } // Ruta por defecto para URLs no encontradas
 ];
 
 @NgModule({

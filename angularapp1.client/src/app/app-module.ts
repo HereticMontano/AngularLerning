@@ -4,13 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
-import { ClimaComponent } from './clima/clima.component';
+import { MuralComponent } from './mural/mural.component';
 import { AboutMeComponent } from './aboutme/aboutme.component';
 
 @NgModule({
   declarations: [
     App,
-    ClimaComponent,
+    MuralComponent,
     AboutMeComponent
   ],
   imports: [

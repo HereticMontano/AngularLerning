@@ -9,11 +9,11 @@ interface WeatherForecast {
 }
 
 @Component({
-  selector: 'app-clima',
-  templateUrl: './clima.component.html',
+  selector: 'app-mural',
+  templateUrl: './mural.component.html',
   standalone: false
 })
-export class ClimaComponent implements OnInit {
+export class MuralComponent implements OnInit {
   public forecasts = signal<WeatherForecast[] | undefined>(undefined);
 
   constructor(private http: HttpClient) {}
