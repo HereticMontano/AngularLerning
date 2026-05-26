@@ -1,8 +1,9 @@
 .pictureText {
   display: flex;
-  justify-content:space-between;
-  width: 100%;  
+  justify-content: space-between;
+  width: 100%;
   box-sizing: border-box;
+  margin-top: 10px;
 }
 
 img {
@@ -13,7 +14,7 @@ img {
 .textContent p {
   margin-top: 10px;
   margin-bottom: 10px;
-}
+} 
 
 .textContent strong {
   display: block; /* Convierte el elemento inline en bloque para que acepte márgenes verticales */
