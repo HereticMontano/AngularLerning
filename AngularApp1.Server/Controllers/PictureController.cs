@@ -1,6 +1,7 @@
 using AngularApp1.Server.Enum;
 using AngularApp1.Server.Model;
 using Microsoft.AspNetCore.Mvc;
+using Repository.Interface;
 
 namespace AngularApp1.Server.Controllers
 {
@@ -8,10 +9,31 @@ namespace AngularApp1.Server.Controllers
     [Route("[controller]")]
     public class PictureController : ControllerBase
     {
-        [HttpGet("Mural")]
-        public IEnumerable<PictureModel> GetMural()
+        private readonly IGalleryRepository _galleryRepository;
+
+        public PictureController(IGalleryRepository galleryRepository)
         {
-            return GetPicture(PictureType.Mural);
+            _galleryRepository = galleryRepository;
+        }
+
+        [HttpGet("GetGallery")]
+        public async Task<IEnumerable<PictureModel>> GetGallery(string galleryId)
+        {
+            var gallery = await _galleryRepository.GetByIdAsync(galleryId);
+
+            if (gallery is null)
+            {
+                return Enumerable.Empty<PictureModel>();
+
+            }
+
+            return gallery.Pictures.Select(picture => new PictureModel
+            {
+                URLLocationLowCuality = picture.UrlLocationLowCuality,
+                URLLocationHighCuality = picture.UrlLocationHighCuality,
+                Title = picture.Title,
+                Description = picture.Description
+            });
         }
 
         [HttpGet("Studio")]

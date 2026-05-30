@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GalleryComponent } from './gallery/gallery.component';
 import { AboutMeComponent } from './aboutme/aboutme.component';
+import { AdminComponent } from './admin/admin.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: 'gallery/:category', component: GalleryComponent },
+  { path: 'gallery/:galleryId', component: GalleryComponent },
   { path: 'aboutme', component: AboutMeComponent },
-  { path: '', redirectTo: '/gallery/mural', pathMatch: 'full' },
-  { path: '**', redirectTo: '/gallery/mural' } // Ruta por defecto para URLs no encontradas
+  { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminComponent },
+  { path: '', redirectTo: '/gallery/6a1accca753932b2217171d2', pathMatch: 'full' },
+  { path: '**', redirectTo: '/gallery/6a1accca753932b2217171d2' } // Ruta por defecto para URLs no encontradas
 ];
 
 @NgModule({

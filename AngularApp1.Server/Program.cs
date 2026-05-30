@@ -1,3 +1,4 @@
+using AngularApp1.Server.Service;
 using AngularApp1.Server.Settings;
 using Microsoft.EntityFrameworkCore;
 using Repository;
@@ -19,6 +20,7 @@ builder.Services.AddDbContext<GalleryDbContext>(options =>
     options.UseMongoDB(mongoSettings.ConnectionString, mongoSettings.DatabaseName));
 
 builder.Services.AddScoped<IGalleryRepository, GalleryRepository>();
+builder.Services.AddSingleton<IProcessImagService, ProcessImagService>();
 
 
 var app = builder.Build();

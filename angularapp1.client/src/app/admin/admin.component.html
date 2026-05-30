@@ -1,0 +1,33 @@
+<div class="admin-container">
+  <h2>Alta de galeria</h2>
+  <form class="admin-form" (ngSubmit)="onSubmitGalery()">
+    
+    <label for="title">Título</label>
+    <input id="title" name="title" type="text" [(ngModel)]="titleGallery" />
+
+    <label for="description">Descripción</label>
+    <input id="description" name="description" type="text" [(ngModel)]="descriptionGallery" />
+
+    <button type="submit">Guardar</button>
+  </form>
+
+  <h2>Alta de imagen</h2>
+
+  <form class="admin-form" (ngSubmit)="onSubmitPicture()">
+    <label for="idGallery">Id de la galería</label>
+    <input id="idGallery" name="idGallery" type="text" [(ngModel)]="idGallery" />
+
+    <label for="title">Título</label>
+    <input id="title" name="title" type="text" [(ngModel)]="title" />
+
+    <label for="description">Descripción</label>
+    <input id="description" name="description" type="text" [(ngModel)]="description" />
+
+    <label for="picture">Imagen</label>
+    <input id="picture" name="picture" type="file" accept="image/*" (change)="onFileSelected($event)" />
+
+    <button type="submit">Guardar</button>
+  </form>
+
+  
+</div>

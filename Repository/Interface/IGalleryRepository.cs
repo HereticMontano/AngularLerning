@@ -1,4 +1,3 @@
-using MongoDB.Bson;
 using Repository.Entity;
 
 namespace Repository.Interface
@@ -6,9 +5,11 @@ namespace Repository.Interface
     public interface IGalleryRepository
     {
         Task<Gallery> CreateAsync(Gallery gallery);
-        Task<bool> DeleteAsync(ObjectId id);
-        Task<Gallery?> GetByIdAsync(ObjectId id);
+        Task<bool> DeleteAsync(string id);
+        Task<Gallery?> GetByIdAsync(string id);
         Task<List<Gallery>> GetAllAsync();
-        Task<Gallery?> UpdateAsync(ObjectId id, Gallery gallery);
+        Task<Gallery?> UpdateAsync(string id, Gallery gallery);
+
+        Task<bool> AddPictureToGalleryAsync(string galleryId, Picture picture);
     }
 }

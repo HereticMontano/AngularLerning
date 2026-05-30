@@ -23,15 +23,15 @@ export class GalleryComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      const category = params.get('category');
-      if (category) {        
-        this.getPictures(category);
+      const galleryId = params.get('galleryId');
+      if (galleryId) {        
+        this.getPictures(galleryId);
       }
     });
   }
 
-  getPictures(category: string) {    
-    let endpoint = '/picture/' + category;
+  getPictures(galleryId: string) {    
+    let endpoint = `/picture/GetGallery?galleryId=${galleryId}`;
       
     this.http.get<PictureModel[]>(endpoint).subscribe({
       next: (result) => {

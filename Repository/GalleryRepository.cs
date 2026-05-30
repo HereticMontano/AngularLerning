@@ -16,6 +16,9 @@ namespace Repository
 
         public async Task<Gallery> CreateAsync(Gallery gallery)
         {
+            if (string.IsNullOrWhiteSpace(gallery.Id))
+                gallery.Id = ObjectId.GenerateNewId().ToString();
+
             await _context.Gallery.AddAsync(gallery);
             await _context.SaveChangesAsync();
             return gallery;
@@ -26,13 +29,13 @@ namespace Repository
             return await _context.Gallery.ToListAsync();
         }
 
-        public async Task<Gallery?> GetByIdAsync(ObjectId id)
+        public async Task<Gallery?> GetByIdAsync(string id)
         {
             return await _context.Gallery
                 .FirstOrDefaultAsync(g => g.Id == id);
         }
 
-        public async Task<Gallery?> UpdateAsync(ObjectId id, Gallery gallery)
+        public async Task<Gallery?> UpdateAsync(string id, Gallery gallery)
         {
             var existing = await _context.Gallery
                 .FirstOrDefaultAsync(g => g.Id == id);
@@ -40,14 +43,14 @@ namespace Repository
             if (existing is null)
                 return null;
 
-            existing.Name = gallery.Name;
+            existing.Title = gallery.Title;
             existing.Pictures = gallery.Pictures;
 
             await _context.SaveChangesAsync();
             return existing;
         }
 
-        public async Task<bool> DeleteAsync(ObjectId id)
+        public async Task<bool> DeleteAsync(string id)
         {
             var existing = await _context.Gallery
                 .FirstOrDefaultAsync(g => g.Id == id);
@@ -57,6 +60,20 @@ namespace Repository
 
             _context.Gallery.Remove(existing);
             await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> AddPictureToGalleryAsync(string galleryId, Picture picture)
+        {
+            var gallery = await _context.Gallery
+                .FirstOrDefaultAsync(g => g.Id == galleryId);
+            
+            if (gallery is null)
+                return false;
+
+            gallery.Pictures.Add(picture);
+            await _context.SaveChangesAsync();
+
             return true;
         }
     }
