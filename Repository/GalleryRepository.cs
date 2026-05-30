@@ -17,7 +17,7 @@ namespace Repository
         public async Task<Gallery> CreateAsync(Gallery gallery)
         {
             if (string.IsNullOrWhiteSpace(gallery.Id))
-                gallery.Id = ObjectId.GenerateNewId().ToString();
+                gallery.Id = "6a1accca753932b2217171d2";//ObjectId.GenerateNewId().ToString();
 
             await _context.Gallery.AddAsync(gallery);
             await _context.SaveChangesAsync();

@@ -2,6 +2,7 @@ using AngularApp1.Server.Enum;
 using AngularApp1.Server.Model;
 using AngularApp1.Server.Settings;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Repository.Interface;
 
 namespace AngularApp1.Server.Controllers
@@ -11,9 +12,9 @@ namespace AngularApp1.Server.Controllers
     public class PictureController : ControllerBase
     {
         private readonly IGalleryRepository _galleryRepository;
-        private readonly StorageSettings _storageSettings;  
+        private readonly IOptions<StorageSettings> _storageSettings;  
 
-        public PictureController(IGalleryRepository galleryRepository, StorageSettings storageSettings)
+        public PictureController(IGalleryRepository galleryRepository, IOptions<StorageSettings> storageSettings)
         {
             _galleryRepository = galleryRepository;
             _storageSettings = storageSettings;
@@ -31,8 +32,8 @@ namespace AngularApp1.Server.Controllers
 
             return gallery.Pictures.Select(picture => new PictureModel
             {
-                URLLocationLowCuality = picture.UrlLocationLowCuality,
-                URLLocationHighCuality = picture.UrlLocationHighCuality,
+                URLLocationLowCuality = Path.Combine(_storageSettings.Value.RequestPath, Path.GetFileName(picture.UrlLocationLowCuality)),
+                URLLocationHighCuality = Path.Combine(_storageSettings.Value.RequestPath, Path.GetFileName(picture.UrlLocationHighCuality)),
                 Title = picture.Title,
                 Description = picture.Description
             });

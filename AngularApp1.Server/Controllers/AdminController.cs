@@ -2,6 +2,7 @@ using AngularApp1.Server.Model;
 using AngularApp1.Server.Service;
 using AngularApp1.Server.Settings;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Repository.Interface;
 
 namespace AngularApp1.Server.Controllers
@@ -12,9 +13,9 @@ namespace AngularApp1.Server.Controllers
     {
         private readonly IGalleryRepository _galleryRepository;
         private readonly IProcessImagService _processImagService;
-        private readonly StorageSettings _storageSettings;
+        private readonly IOptions<StorageSettings> _storageSettings;
 
-        public AdminController(IGalleryRepository galleryRepository, IProcessImagService processImagService, StorageSettings storageSettings)
+        public AdminController(IGalleryRepository galleryRepository, IProcessImagService processImagService, IOptions<StorageSettings> storageSettings)
         {
             _galleryRepository = galleryRepository;
             _processImagService = processImagService;
@@ -47,8 +48,8 @@ namespace AngularApp1.Server.Controllers
                 var resizedPicture = await _processImagService.ResizePictureAsync(originalPicture, 0.5);
 
                 string nameFile = $"{Guid.NewGuid()}";
-                var pathOriginal = Path.Combine(_storageSettings.RootPictures, $"{nameFile}_Original.jpg");
-                var pathLowQuality = Path.Combine(_storageSettings.RootPictures, $"{nameFile}_Resized.jpg");
+                var pathOriginal = Path.Combine(_storageSettings.Value.RootPictures, $"{nameFile}_Original.jpg");
+                var pathLowQuality = Path.Combine(_storageSettings.Value.RootPictures, $"{nameFile}_Resized.jpg");
 
                 System.IO.File.WriteAllBytes(pathOriginal, originalPicture);
                 System.IO.File.WriteAllBytes(pathLowQuality, resizedPicture);
