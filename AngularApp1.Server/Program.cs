@@ -12,10 +12,10 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+
+builder.Services.Configure<StorageSettings>(builder.Configuration.GetSection("StorageSettings"));
+
 var mongoSettings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSetting>()!;
-
-//builder.Services.AddSingleton(mongoSettings);
-
 builder.Services.AddDbContext<GalleryDbContext>(options =>
     options.UseMongoDB(mongoSettings.ConnectionString, mongoSettings.DatabaseName));
 

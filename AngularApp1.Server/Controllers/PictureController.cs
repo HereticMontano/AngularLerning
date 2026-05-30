@@ -1,5 +1,6 @@
 using AngularApp1.Server.Enum;
 using AngularApp1.Server.Model;
+using AngularApp1.Server.Settings;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Interface;
 
@@ -10,10 +11,12 @@ namespace AngularApp1.Server.Controllers
     public class PictureController : ControllerBase
     {
         private readonly IGalleryRepository _galleryRepository;
+        private readonly StorageSettings _storageSettings;  
 
-        public PictureController(IGalleryRepository galleryRepository)
+        public PictureController(IGalleryRepository galleryRepository, StorageSettings storageSettings)
         {
             _galleryRepository = galleryRepository;
+            _storageSettings = storageSettings;
         }
 
         [HttpGet("GetGallery")]
@@ -23,8 +26,7 @@ namespace AngularApp1.Server.Controllers
 
             if (gallery is null)
             {
-                return Enumerable.Empty<PictureModel>();
-
+                return [];
             }
 
             return gallery.Pictures.Select(picture => new PictureModel
