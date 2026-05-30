@@ -16,23 +16,22 @@ interface PictureModel {
   standalone: false
 })
 export class GalleryComponent implements OnInit {
-  public pictures = signal<PictureModel[] | undefined>(undefined);
-  public currentCategoria: string = '';
+  public pictures = signal<PictureModel[] | undefined>(undefined);  
+  public selectedPicture = signal<PictureModel | null>(null);
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      const categoria = params.get('category');
-      if (categoria) {
-        this.currentCategoria = categoria;
-        this.getPictures(categoria);
+      const category = params.get('category');
+      if (category) {        
+        this.getPictures(category);
       }
     });
   }
 
-  getPictures(categoria: string) {    
-    let endpoint = '/picture/' + categoria;
+  getPictures(category: string) {    
+    let endpoint = '/picture/' + category;
       
     this.http.get<PictureModel[]>(endpoint).subscribe({
       next: (result) => {
@@ -42,5 +41,13 @@ export class GalleryComponent implements OnInit {
         console.error(error);
       }
     });
+  }
+
+  openModal(picture: PictureModel) {
+    this.selectedPicture.set(picture);
+  }
+
+  closeModal() {
+    this.selectedPicture.set(null);
   }
 }

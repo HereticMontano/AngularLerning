@@ -1,8 +1,19 @@
 <div class="gallery-container" *ngIf="pictures()">
   <div class="gallery-item" *ngFor="let pic of pictures()">
-    <h3>{{ pic.title }}</h3>
-    <img [src]="pic.urlLocationLowCuality" [alt]="pic.description" />
+    
+    <img [src]="pic.urlLocationLowCuality" [alt]="pic.description" (click)="openModal(pic)" />
   </div>
 </div>
 
-<p *ngIf="!pictures()"><em>Cargando {{ currentCategoria }}...</em></p>
+
+
+<!-- EL POPUP / MODAL: solo se renderiza si hay una imagen seleccionada -->
+<div class="modal-overlay" *ngIf="selectedPicture()" (click)="closeModal()">
+  <div class="modal-content">
+    <span class="close-button" (click)="closeModal()">&times;</span>
+    <!-- Aquí cargamos la versión de ALTA calidad -->
+    <img [src]="selectedPicture()?.urlLocationHighCuality" 
+         [alt]="selectedPicture()?.description" />
+    <p>{{ selectedPicture()?.title }}</p>
+  </div>
+</div>

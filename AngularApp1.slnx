@@ -4,4 +4,5 @@
     <Deploy />
   </Project>
   <Project Path="AngularApp1.Server/AngularApp1.Server.csproj" />
+  <Project Path="Repository/Repository.csproj" Id="5ba1f529-9f7f-41a5-860d-33424ac9a1c4" />
 </Solution>

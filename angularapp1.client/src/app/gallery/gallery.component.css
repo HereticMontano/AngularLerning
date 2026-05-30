@@ -1,27 +1,81 @@
 .gallery-container {
-  display: flex;
-  flex-direction: column;
-  gap: 40px; /* Salto de línea amplio entre las imágenes */
-  align-items: center; /* Centra las imágenes en la pantalla */
+  /* Masonry con columnas: cada imagen conserva su proporción natural */
+  column-count: 4;
+  column-gap: 20px;
   padding: 20px;
 }
 
+/* Adaptación responsiva del número de columnas */
+@media (max-width: 1200px) {
+  .gallery-container {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 800px) {
+  .gallery-container {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 500px) {
+  .gallery-container {
+    column-count: 1;
+  }
+}
+
 .gallery-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* Evita que una imagen se parta entre dos columnas */
+  break-inside: avoid;
+  margin-bottom: 20px;
   text-align: center;
 }
 
 .gallery-item h3 {
-  margin-bottom: 15px;
+  margin: 10px 0;
   color: #333;
 }
 
 .gallery-item img {
-  max-width: 100%;
-  height: auto;
-  /* Al no forzar un 'width' fijo, la imagen tomará su tamaño natural "lowcuality" o se achicará si la pantalla es muy pequeña */
+  width: 100%;
+  height: auto; /* Respeta la proporción real de cada imagen */
+  display: block;
   border-radius: 4px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Pequeño sombreado para que se vea bien */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+
+/* MODAL */
+
+.modal-overlay {
+  position: fixed; /* Se queda fijo aunque hagas scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo negro semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Para que esté por encima de todo lo demás */
+}
+.modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+.modal-content img {
+  max-width: 100%;
+  max-height: 85vh; /* Para que no se salga de la pantalla en vertical */
+  object-fit: contain;
+  border-radius: 4px;
+}
+.close-button {
+  position: absolute;
+  top: -15px;
+  right: -10px;
+  color: white;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
 }
