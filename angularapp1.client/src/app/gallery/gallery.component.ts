@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 interface PictureModel {
   urlLocationLowCuality: string;
@@ -13,7 +14,8 @@ interface PictureModel {
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.css'],
-  standalone: false
+  standalone: true,
+  imports: [CommonModule]
 })
 export class GalleryComponent implements OnInit {
   public pictures = signal<PictureModel[] | undefined>(undefined);  

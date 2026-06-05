@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using MongoDB.Bson;
 using Repository.Entity;
 using Repository.Interface;
 
@@ -26,7 +25,11 @@ namespace Repository
 
         public async Task<List<Gallery>> GetAllAsync()
         {
-            return await _context.Gallery.ToListAsync();
+            return await _context.Gallery.Select(g => new Gallery
+            {
+                Id = g.Id,
+                Title = g.Title
+            }).ToListAsync();
         }
 
         public async Task<Gallery?> GetByIdAsync(string id)
@@ -67,7 +70,7 @@ namespace Repository
         {
             var gallery = await _context.Gallery
                 .FirstOrDefaultAsync(g => g.Id == galleryId);
-            
+
             if (gallery is null)
                 return false;
 

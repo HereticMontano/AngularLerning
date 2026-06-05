@@ -3,8 +3,9 @@
   <nav>
     <h2 class="logo">MU</h2>
     <ul>
-      <li><a [routerLink]="['/gallery', '6a1accca753932b2217171d2']" routerLinkActive="active">Mural</a></li>
-      <li><a [routerLink]="['/gallery', '6a1accca753932b221717']" routerLinkActive="active">Studio</a></li>      
+      <li *ngFor="let gallery of galleries()">
+        <a [routerLink]="['/gallery', gallery.id]" routerLinkActive="active">{{ gallery.title }}</a>
+      </li>      
       <li><a routerLink="/aboutme" routerLinkActive="active">About Me</a></li>
       <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
       <li><a routerLink="/admin" routerLinkActive="active">Admin</a></li>

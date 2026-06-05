@@ -20,6 +20,20 @@ namespace AngularApp1.Server.Controllers
             _storageSettings = storageSettings;
         }
 
+        [HttpGet("GetGalleriesNames")]
+        public async Task<IActionResult> GetGalleriesNamesAsync()
+        {
+            var galleries = await _galleryRepository.GetAllAsync();
+
+            var result = galleries.Select(g => new GalleryNameModel
+            {
+                Id = g.Id!,
+                Title = g.Title
+            }).ToList();
+
+            return Ok(result);
+        }
+
         [HttpGet("GetGallery")]
         public async Task<IEnumerable<PictureModel>> GetGallery(string galleryId)
         {
