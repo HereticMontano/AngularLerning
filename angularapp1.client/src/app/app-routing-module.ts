@@ -12,5 +12,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
   { path: 'admin/gallery/:id', component: AdminGalleryDetailComponent, canActivate: [authGuard] },  
-  { path: '**', redirectTo: 'aboutme' } // Ruta por defecto para URLs no encontradas
+  { path: '', children: [] }, 
+  { path: '**', redirectTo: '' } 
 ];
