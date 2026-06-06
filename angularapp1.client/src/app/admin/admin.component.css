@@ -13,44 +13,6 @@
   color: #333;
 }
 
-.admin-form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.admin-form label {
-  font-weight: 600;
-  color: #555;
-}
-
-.admin-form input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-.admin-form button {
-  margin-top: 15px;
-  padding: 10px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-.admin-form button:hover:not(:disabled) {
-  background-color: #555;
-}
-
-.admin-form button:disabled {
-  background-color: #aaa;
-  cursor: not-allowed;
-}
-
 .galleries-list {
   display: flex;
   flex-direction: column;
@@ -75,22 +37,6 @@
   margin: 0;
   font-size: 1.2rem;
   color: #222;
-}
-
-.delete-gallery-btn {
-  background: none;
-  border: none;
-  color: #dc3545;
-  font-size: 1.5rem;
-  font-weight: bold;
-  cursor: pointer;
-  line-height: 1;
-  padding: 0 5px;
-  margin: -5px -5px 0 0;
-}
-
-.delete-gallery-btn:hover {
-  color: #a71d2a;
 }
 
 .gallery-card p {

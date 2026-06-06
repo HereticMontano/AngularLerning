@@ -12,3 +12,66 @@ body {
     margin: 0 auto; /* El 0 arriba/abajo, y auto a los lados para centrar */
     padding: 0 20px; /* Un poco de espacio a los lados para pantallas pequeñas */
   }
+
+/* Estilos comunes para formularios de administración */
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.admin-form label {
+  font-weight: bold;
+  color: #555;
+}
+
+.admin-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.admin-form button {
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.admin-form button:hover:not(:disabled) {
+  background-color: #555;
+}
+
+.admin-form button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+/* Botón común para eliminar (cruz circular) */
+.delete-gallery-btn {
+  background-color: rgba(255, 255, 255, 0.85); /* Fondo blanco semitransparente para que se lea siempre */
+  border: none;
+  color: #dc3545;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  width: 30px;        /* Hacemos el botón un círculo perfecto */
+  height: 30px;
+  border-radius: 50%; /* Bordes redondeados = círculo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
+}
+
+.delete-gallery-btn:hover {
+   color: #fff;
+   background-color: #dc3545; /* Al pasar el ratón se vuelve rojo sólido */
+   transform: scale(1.1); /* Efecto de crecimiento sutil */
+}
