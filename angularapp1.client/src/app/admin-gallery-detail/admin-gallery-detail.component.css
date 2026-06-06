@@ -1,3 +1,5 @@
+@import '../admin/admin-shared.css';
+
 .admin-detail-container {
   padding: 20px;
   max-width: 1000px;

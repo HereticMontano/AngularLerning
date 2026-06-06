@@ -1,31 +1,54 @@
 using AngularApp1.Server.Model;
 using AngularApp1.Server.Service;
 using AngularApp1.Server.Settings;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Repository.Interface;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace AngularApp1.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class AdminController : ControllerBase
     {
         private readonly IGalleryRepository _galleryRepository;
         private readonly IProcessImagService _processImagService;
         private readonly IOptions<StorageSettings> _storageSettings;
+        private readonly IOptions<AdminCredentials> _adminCredentials;
 
-        public AdminController(IGalleryRepository galleryRepository, IProcessImagService processImagService, IOptions<StorageSettings> storageSettings)
+        public AdminController(IGalleryRepository galleryRepository, IProcessImagService processImagService, IOptions<StorageSettings> storageSettings, IOptions<AdminCredentials> adminCredentials)
         {
             _galleryRepository = galleryRepository;
             _processImagService = processImagService;
             _storageSettings = storageSettings;
+            _adminCredentials = adminCredentials;
         }
 
+        [AllowAnonymous]
         [HttpPost("Login")]
-        public void Login()
+        public IActionResult Login(LoginRequest request)
         {
+            if (request.Username == _adminCredentials.Value.Username && request.Password == _adminCredentials.Value.Password)
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.UTF8.GetBytes(_adminCredentials.Value.JwtSecret);
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, request.Username) }),
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                return Ok(new { token = tokenHandler.WriteToken(token) });
+            }
 
+            return Unauthorized("Credenciales inválidas.");
         }
 
         [HttpPost("AddGallery")]
