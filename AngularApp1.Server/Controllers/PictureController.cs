@@ -46,6 +46,7 @@ namespace AngularApp1.Server.Controllers
 
             return gallery.Pictures.Select(picture => new PictureModel
             {
+                Id = picture.Id,
                 URLLocationLowCuality = Path.Combine(_storageSettings.Value.RequestPath, Path.GetFileName(picture.UrlLocationLowCuality)),
                 URLLocationHighCuality = Path.Combine(_storageSettings.Value.RequestPath, Path.GetFileName(picture.UrlLocationHighCuality)),
                 Title = picture.Title,

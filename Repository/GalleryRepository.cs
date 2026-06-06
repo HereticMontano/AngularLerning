@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
 using Repository.Entity;
 using Repository.Interface;
 
@@ -15,9 +16,6 @@ namespace Repository
 
         public async Task<Gallery> CreateAsync(Gallery gallery)
         {
-            if (string.IsNullOrWhiteSpace(gallery.Id))
-                gallery.Id = "6a1accca753932b2217171d2";//ObjectId.GenerateNewId().ToString();
-
             await _context.Gallery.AddAsync(gallery);
             await _context.SaveChangesAsync();
             return gallery;
@@ -53,7 +51,7 @@ namespace Repository
             return existing;
         }
 
-        public async Task<bool> DeleteAsync(string id)
+        public async Task<bool> DeleteGalleryAsync(string id)
         {
             var existing = await _context.Gallery
                 .FirstOrDefaultAsync(g => g.Id == id);
@@ -65,6 +63,7 @@ namespace Repository
             await _context.SaveChangesAsync();
             return true;
         }
+
 
         public async Task<bool> AddPictureToGalleryAsync(string galleryId, Picture picture)
         {
@@ -78,6 +77,24 @@ namespace Repository
             await _context.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<Picture?> DeletePictureFromGalleryAsync(string galleryId, string pictureId)
+        {
+            var gallery = await _context.Gallery
+                .FirstOrDefaultAsync(g => g.Id == galleryId);
+
+            if (gallery is null)
+                return null;
+
+            var picture = gallery.Pictures.FirstOrDefault(p => p.Id == pictureId);
+            if (picture is null)
+                return null;
+
+            gallery.Pictures.Remove(picture);
+            await _context.SaveChangesAsync();
+
+            return picture;
         }
     }
 }

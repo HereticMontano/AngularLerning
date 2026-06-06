@@ -8,7 +8,7 @@ using Repository.Interface;
 namespace AngularApp1.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AdminController : ControllerBase
     {
         private readonly IGalleryRepository _galleryRepository;
@@ -31,6 +31,11 @@ namespace AngularApp1.Server.Controllers
         [HttpPost("AddGallery")]
         public async Task<IActionResult> AddGalleryAsync(CreateGalleryRequest galleryModel)
         {
+            if (string.IsNullOrEmpty(galleryModel.Title))
+            {
+                return BadRequest("El título de la galería es requerido.");
+            }
+
             await _galleryRepository.CreateAsync(new Repository.Entity.Gallery
             {
                 Title = galleryModel.Title
@@ -73,6 +78,57 @@ namespace AngularApp1.Server.Controllers
             }
 
 
+        }
+
+        [HttpDelete("DeletePicture/{galleryId}/{pictureId}")]
+        public async Task<IActionResult> DeletePictureAsync(string galleryId, string pictureId)
+        {
+            var deletedPicture = await _galleryRepository.DeletePictureFromGalleryAsync(galleryId, pictureId);
+            
+            if (deletedPicture is null)
+            {
+                return NotFound();
+            }
+
+            if (System.IO.File.Exists(deletedPicture.UrlLocationHighCuality))
+            {
+                System.IO.File.Delete(deletedPicture.UrlLocationHighCuality);
+            }
+
+            if (System.IO.File.Exists(deletedPicture.UrlLocationLowCuality))
+            {
+                System.IO.File.Delete(deletedPicture.UrlLocationLowCuality);
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("DeleteGallery/{id}")]
+        public async Task<IActionResult> DeleteGalleryAsync(string id)
+        {
+            var gallery = await _galleryRepository.GetByIdAsync(id);
+            
+            if (gallery is null)
+            {
+                return NotFound();
+            }
+
+            foreach (var picture in gallery.Pictures)
+            {
+                if (System.IO.File.Exists(picture.UrlLocationHighCuality))
+                {
+                    System.IO.File.Delete(picture.UrlLocationHighCuality);
+                }
+
+                if (System.IO.File.Exists(picture.UrlLocationLowCuality))
+                {
+                    System.IO.File.Delete(picture.UrlLocationLowCuality);
+                }
+            }
+
+            await _galleryRepository.DeleteGalleryAsync(id);
+
+            return NoContent();
         }
     }
 }

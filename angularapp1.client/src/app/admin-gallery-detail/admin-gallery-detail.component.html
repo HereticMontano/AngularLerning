@@ -1,0 +1,39 @@
+<div class="admin-detail-container">
+  <div class="header">
+    <button routerLink="/admin" class="back-btn">&larr; Volver a Galerías</button>
+    <h2>Gestión de Imágenes</h2>
+  </div>
+
+  <div class="form-section">
+    <h3>Subir Nueva Imagen</h3>
+    <form class="admin-form" (ngSubmit)="onSubmitPicture()">
+      <label for="title">Título</label>
+      <input id="title" name="title" type="text" [(ngModel)]="title" />
+
+      <label for="description">Descripción</label>
+      <input id="description" name="description" type="text" [(ngModel)]="description" />
+
+      <label for="picture">Imagen</label>
+      <input id="picture" name="picture" type="file" accept="image/*" (change)="onFileSelected($event)" />
+
+      <button type="submit" [disabled]="!base64Picture">Guardar Imagen</button>
+    </form>
+  </div>
+
+  <div class="images-section">
+    <h3>Imágenes de la Galería</h3>
+    <div class="gallery-grid" *ngIf="pictures().length > 0; else noImages">
+      <div class="gallery-item" *ngFor="let pic of pictures()">
+        <button class="delete-gallery-btn" (click)="deletePicture(pic.id)" title="Eliminar Imagen">&times;</button>
+        <img [src]="pic.urlLocationLowCuality" [alt]="pic.description" />
+        <div class="item-info">
+          <strong>{{ pic.title }}</strong>
+          <p>{{ pic.description }}</p>
+        </div>
+      </div>
+    </div>
+    <ng-template #noImages>
+      <p>No hay imágenes en esta galería aún.</p>
+    </ng-template>
+  </div>
+</div>

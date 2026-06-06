@@ -1,74 +1,68 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+interface GalleryNameModel {
+  id: string;
+  title: string;
+}
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
   standalone: true,
-  imports: [FormsModule]
+  imports: [FormsModule, CommonModule, RouterModule]
 })
-export class AdminComponent {
-  idGallery: string = '';
-  title: string = '';
-  description: string = '';
-  base64Picture: string = '';
-  titleGallery: string = '';
-  descriptionGallery: string = '';
+export class AdminComponent implements OnInit {
+  titleGallery: string = '';  
+  public galleries = signal<GalleryNameModel[]>([]);
+
   constructor(private http: HttpClient) { }
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (!input.files || input.files.length === 0) {
-      return;
-    }
-    
-    const reader = new FileReader() 
-    reader.onload = () => this.base64Picture = reader.result as string;
-    reader.readAsDataURL(input.files[0]);
+  ngOnInit() {
+    this.getGalleries();
   }
 
-  onSubmitPicture() {
-
-    
-    this.http.post('/admin/AddPicture', {
-      idGallery: '6a1accca753932b2217171d2', //this.idGallery,
-      title: this.title,
-      description: this.description,
-      base64Picture: this.base64Picture
-    }).subscribe({
-      next: () => {
-
-        // Limpiar el formulario
-        this.idGallery = '';
-        this.title = '';
-        this.description = '';
-        this.base64Picture = '';
+  getGalleries() {
+    this.http.get<GalleryNameModel[]>('/picture/GetGalleriesNames').subscribe({
+      next: (result) => {
+        this.galleries.set(result);
       },
       error: (error) => {
-        console.error('Error al agregar imagen:', error);
+        console.error('Error fetching galleries', error);
       }
-    });   
+    });
   }
 
   onSubmitGalery() {
-
     const body = {      
-      title: this.titleGallery,
-      description: this.descriptionGallery,      
+      title: this.titleGallery,         
     };
 
-    this.http.post('/admin/AddGallery', body).subscribe({
+    this.http.post('/api/admin/AddGallery', body).subscribe({
       next: () => {
-        this.titleGallery = '';
-        this.descriptionGallery = '';      
+        this.titleGallery = '';        
+        this.getGalleries(); // Refrescar la lista de galerías
       },
-      error: (error) => {
-        console.error('Error al agregar imagen:', error);
+      error: (err) => {
+        alert(err.error);
       }
     });   
   }
+
+  deleteGallery(id: string) {
+    if (confirm('¿Estás seguro de que quieres eliminar esta galería y todas sus imágenes?')) {
+      this.http.delete(`/api/admin/DeleteGallery/${id}`).subscribe({
+        next: () => {
+          this.getGalleries(); // Refresh after deletion
+        },
+        error: (err) => {
+          alert(err.error);
+        }
+      });
+    }
+  }
 }
-
-

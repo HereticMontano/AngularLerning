@@ -7,7 +7,7 @@ namespace Repository.Entity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string? Id { get; set; }
+        public string Id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
         public required string Title { get; set; }
         
         public List<Picture> Pictures { get; set; } = new();

@@ -42,6 +42,76 @@
   cursor: pointer;
 }
 
-.admin-form button:hover {
+.admin-form button:hover:not(:disabled) {
   background-color: #555;
+}
+
+.admin-form button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.galleries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.gallery-card {
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #222;
+}
+
+.delete-gallery-btn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 5px;
+  margin: -5px -5px 0 0;
+}
+
+.delete-gallery-btn:hover {
+  color: #a71d2a;
+}
+
+.gallery-card p {
+  margin: 0 0 15px 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.manage-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.manage-btn:hover {
+  background-color: #0056b3;
 }

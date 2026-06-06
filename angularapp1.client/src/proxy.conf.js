@@ -7,7 +7,7 @@ const PROXY_CONFIG = [
   {
     context: [
       "/picture",
-      "/admin",
+      "/api/admin",
       "/images"
     ],
     target,
