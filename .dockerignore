@@ -1,0 +1,8 @@
+angularapp1.client/
+
+**/bin/
+**/obj/
+.git/
+.github
+.vs/
+*.slnx
