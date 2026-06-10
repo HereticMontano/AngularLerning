@@ -4,6 +4,9 @@ services:
       context: .
       dockerfile: AngularApp1.Server/Dockerfile
     restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Release
+      - StorageSettings__RootPictures=/app/pictures
     ports:
       - "8080:8080"
 
