@@ -9,6 +9,8 @@ services:
       - StorageSettings__RootPictures=/app/pictures
     ports:
       - "8080:8080"
+    volumes:
+      - "D:/Imagenes:/app/pictures"
 
   web:    
     build:

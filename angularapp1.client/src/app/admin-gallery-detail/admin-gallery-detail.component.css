@@ -1,9 +1,9 @@
 @import '../admin/admin-shared.css';
 
 .admin-detail-container {
-  padding: 20px;
+  padding: 0;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 20px auto 60px auto;
 }
 
 .header {
@@ -11,69 +11,93 @@
   align-items: center;
   gap: 20px;
   margin-bottom: 30px;
+  border-bottom: 1px solid #e8e2dc;
+  padding-bottom: 20px;
 }
 
 .back-btn {
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  padding: 8px 16px;
-  border-radius: 4px;
+  background-color: #f5f0ea;
+  border: 1px solid #e8e2dc;
+  padding: 10px 20px;
+  border-radius: 6px;
   cursor: pointer;
   text-decoration: none;
-  color: #333;
-}
-
-.delete-gallery-btn {
-  position: absolute; /* Clave: flota sobre el contenido */
-  top: 8px;           /* Distancia desde arriba */
-  right: 8px;         /* Distancia desde la derecha */
+  color: #5c504c;
+  font-weight: 500;
+  transition: all 0.2s;
 }
 
 .back-btn:hover {
-  background-color: #e0e0e0;
+  background-color: #e8e2dc;
+  color: #4a3f3c;
+}
+
+.header h2 {
+  margin: 0;
+  color: #4a3f3c;
+  font-weight: 400;
 }
 
 .form-section {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
+  background-color: #ffffff;
+  padding: 30px;
+  border: 1px solid #e8e2dc;
+  border-radius: 12px;
   margin-bottom: 40px;
+  box-shadow: 0 6px 20px rgba(74, 63, 60, 0.04);
 }
 
 .admin-form {
-  max-width: 400px;
+  max-width: 500px;
 }
 
 .images-section h3 {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  color: #4a3f3c;
+  font-weight: 400;
+  font-size: 1.5rem;
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
 }
 
 .gallery-item {
-  border: 1px solid #eee;
+  border: 1px solid #e8e2dc;
   border-radius: 8px;
   overflow: hidden;
-  position: relative; /* Clave: hace que el botón se posicione dentro de esta tarjeta */
+  position: relative;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(74, 63, 60, 0.06);
+  transition: transform 0.2s;
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(74, 63, 60, 0.1);
 }
 
 .gallery-item img {
   width: 100%;
-  height: 150px;
+  height: 180px;
   object-fit: cover;
   display: block;
 }
 
 .item-info {
-  padding: 10px;
+  padding: 15px;
 }
 
 .item-info p {
   margin: 5px 0 0;
-  font-size: 0.9em;
-  color: #666;
+  font-size: 0.95em;
+  color: #5c504c;
+}
+
+.delete-gallery-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }

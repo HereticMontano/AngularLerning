@@ -1,31 +1,39 @@
 @import './admin-shared.css';
 
 .admin-container {
-  max-width: 480px;
+  max-width: 600px;
   margin: 60px auto;
-  padding: 30px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+  background-color: #ffffff;
+  border: 1px solid #e8e2dc;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(74, 63, 60, 0.06);
 }
 
 .admin-container h2 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 30px;
+  color: #4a3f3c;
+  font-weight: 400;
 }
 
 .galleries-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
 .gallery-card {
-  border: 1px solid #eee;
-  padding: 15px;
+  border: 1px solid #e8e2dc;
+  padding: 20px;
   border-radius: 8px;
-  background-color: #fafafa;
+  background-color: #fcfaf8;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.gallery-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(74, 63, 60, 0.08);
 }
 
 .card-header {
@@ -37,29 +45,34 @@
 
 .card-header h3 {
   margin: 0;
-  font-size: 1.2rem;
-  color: #222;
+  font-size: 1.25rem;
+  color: #4a3f3c;
+  font-weight: 500;
 }
 
 .gallery-card p {
-  margin: 0 0 15px 0;
-  color: #666;
-  font-size: 0.9rem;
+  margin: 0 0 20px 0;
+  color: #8a7c78;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .manage-btn {
-  background-color: #007bff;
+  background-color: #c46a41;
   color: white;
   border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
+  padding: 10px 15px;
+  border-radius: 6px;
   cursor: pointer;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  display: block;
+  text-align: center;
   width: 100%;
   box-sizing: border-box;
+  transition: background-color 0.2s;
 }
 
 .manage-btn:hover {
-  background-color: #0056b3;
+  background-color: #a85834;
 }
